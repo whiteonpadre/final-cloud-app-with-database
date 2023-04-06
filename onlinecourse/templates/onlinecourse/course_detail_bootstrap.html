@@ -54,10 +54,10 @@
             <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#exam">Take Exam</button>
             <div id="exam" class="collapse">
                 {% if user.is_authenticated %}
-         <!---->           <form id="questionform" action="{% url 'onlinecourse:submit' %}" method="post">
+                    <form id="questionform" action="{% url 'onlinecourse:submit' course_id=course.id %}" method="post">
                         {% for question in course.question_set.all %}
                             <div class="card mt-1">
-                                <div class="card-header"><h5>{{ question.question_text}}</h5></div>
+                                <div class="card-header"><h5>{{ question.question_text }}</h5></div>
                                 {% csrf_token %}
                                 <div class="form-group">
                                     {% for choice in question.choice_set.all %}
@@ -72,10 +72,10 @@
                                 </div>
                             </div>
                         {% endfor %}
+                        <input class="btn btn-success btn-block" type="submit" value="Submit">
                     </form>
                 {% endif %}
-                <input class="btn btn-success btn-block" type="submit" value="Submit">
-            </div>
+           </div>
                 
             <!-- Task: show questions and choices -->
             <!-- <HINT> Use Bootstrap Collapse to hide exam first, more details could be found here
